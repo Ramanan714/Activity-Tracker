@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Tracker</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1 class="header-title">Activity Tracker</h1>
+        <div class="header-controls">
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" placeholder="Search categories and titles...">
+                    <button id="searchBtn" class="btn">Search</button>
+                    <div id="searchSuggestions" class="search-suggestions hidden">
+                        <!-- Search suggestions will appear here -->
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="adding.html" class="btn">Add Items</a>
+                <a href="remove.html" class="btn btn-danger">Remove Items</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Theme Toggle Bar -->
+    <div class="theme-toggle-bar">
+        <div class="theme-toggle-container">
+            <span class="theme-label">Dark Mode</span>
+            <label class="theme-switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="theme-slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <main>
+        <aside class="sidebar">
+            <h2>Categories</h2>
+            <ul id="categoryList" class="category-list">
+                <!-- Categories will be dynamically added here -->
+            </ul>
+        </aside>
+
+        <section class="content">
+            <div class="sort-container">
+                <label for="sortSelect">Sort by:</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="favorites">Favorites</option>
+                    <option value="alphabetical">Alphabetical</option>
+                    <option value="date">Date Added</option>
+                </select>
+            </div>
+            <div id="itemsContainer" class="items-container">
+                <!-- Activity items will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Activity</h2>
+            <form id="editForm">
+                <input type="hidden" id="editItemId">
+                <div class="form-group">
+                    <label for="editCategorySelect">Category:</label>
+                    <select id="editCategorySelect" class="form-control">
+                        <option value="">Select Category</option>
+                    </select>
+                    <button type="button" id="editNewCategoryBtn" class="btn btn-secondary">New Category</button>
+                </div>
+                <div id="editNewCategoryForm" class="form-group hidden">
+                    <label for="editNewCategoryInput">New Category Name:</label>
+                    <input type="text" id="editNewCategoryInput" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editTitleInput">Title:</label>
+                    <input type="text" id="editTitleInput" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDescriptionInput">Description:</label>
+                    <textarea id="editDescriptionInput" class="form-control" rows="3" placeholder="season, chapter, arc, etc."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editProgressInput">Progress:</label>
+                    <input type="text" id="editProgressInput" class="form-control" placeholder="e.g., 50%, Chapter 15, Season 2">
+                </div>
+                <div class="form-group">
+                    <label for="editFavoriteInput">
+                        <input type="checkbox" id="editFavoriteInput"> Mark as Favorite
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Activity</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>Activity Tracker &copy; 2023 | Track your progress, achieve your goals!</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

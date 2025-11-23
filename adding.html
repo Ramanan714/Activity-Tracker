@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items - Activity Tracker</title>
+    <link rel="stylesheet" href="adding.css">
+</head>
+<body>
+    <header>
+        <h1 class="header-title">Add New Activity</h1>
+        <nav class="nav-menu">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="remove.html" class="btn btn-danger">Remove Items</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form id="addForm" class="add-form">
+                <div class="form-group">
+                    <label for="categorySelect">Category:</label>
+                    <select id="categorySelect" class="form-control">
+                        <option value="">Select Category</option>
+                    </select>
+                    <button type="button" id="newCategoryBtn" class="btn btn-secondary">New Category</button>
+                </div>
+                <div id="newCategoryForm" class="form-group hidden">
+                    <label for="newCategoryInput">New Category Name:</label>
+                    <input type="text" id="newCategoryInput" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="titleInput">Title:</label>
+                    <input type="text" id="titleInput" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="descriptionInput">Description:</label>
+                    <textarea id="descriptionInput" class="form-control" rows="3" placeholder="season, chapter, arc, etc."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="progressInput">Progress:</label>
+                    <input type="text" id="progressInput" class="form-control" placeholder="e.g., 50%, Chapter 15, Season 2">
+                </div>
+                <div class="form-group favorite-checkbox">
+                    <label for="favoriteInput" class="checkbox-label">
+                        <input type="checkbox" id="favoriteInput">
+                        <span class="checkmark">★</span>
+                        Mark as Favorite
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Activity</button>
+            </form>
+
+            <div class="existing-data">
+                <div class="existing-categories">
+                    <h3>Existing Categories</h3>
+                    <div id="categoriesList" class="categories-grid">
+                        <!-- Categories will be populated here -->
+                    </div>
+                </div>
+
+                <div class="existing-items">
+                    <h3>Existing Items</h3>
+                    <div class="items-subtitle">by updated/added date</div>
+                    <div id="itemsList" class="items-list">
+                        <!-- Items will be populated here -->
+                    </div>
+                    <button id="seeMoreBtn" class="btn btn-secondary see-more-btn hidden">See More</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Activity Tracker &copy; 2023 | Add your activities and track progress</p>
+    </footer>
+
+    <script src="adding.js"></script>
+</body>
+</html>

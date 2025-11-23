@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Items - Activity Tracker</title>
+    <link rel="stylesheet" href="remove.css">
+</head>
+<body>
+    <header>
+        <h1 class="header-title">Remove Items</h1>
+        <nav class="nav-menu">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="adding.html" class="btn">Add Items</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="remove-container">
+            <div class="remove-options">
+                <button id="removeItemBtn" class="btn btn-danger option-btn">Remove Individual Item</button>
+                <button id="removeCategoryBtn" class="btn btn-danger option-btn">Remove Entire Category</button>
+            </div>
+
+            <div id="removeItemSection" class="remove-section hidden">
+                <h2>Remove Individual Item</h2>
+                <div class="search-filter">
+                    <input type="text" id="itemSearch" placeholder="Search items..." class="form-control">
+                    <select id="itemCategoryFilter" class="form-control">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div id="itemsList" class="items-list">
+                    <!-- Items will be populated here -->
+                </div>
+            </div>
+
+            <div id="removeCategorySection" class="remove-section hidden">
+                <h2>Remove Entire Category</h2>
+                <div class="warning-message">
+                    ⚠️ Warning: Removing a category will delete all items in that category!
+                </div>
+                <div id="categoriesRemoveList" class="categories-list">
+                    <!-- Categories will be populated here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Activity Tracker &copy; 2023 | Manage your activities and categories</p>
+    </footer>
+
+    <script src="remove.js"></script>
+</body>
+</html>
