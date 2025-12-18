@@ -1,4 +1,4 @@
-// profile.js - COMPLETE FIXED VERSION with Wishlist Nav and Workout Fixes
+// file.js - COMPLETE FIXED VERSION with Wishlist Nav and Workout Fixes
 
 class ProfilePage {
     constructor() {
@@ -483,7 +483,7 @@ class ProfilePage {
         }
     }
 
-            resetProfileForm() {
+              resetProfileForm() {
         console.log('resetProfileForm() called');
         
         const profile = this.storage.getProfile() || {}; // FIX: Add fallback
