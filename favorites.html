@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="favorites.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Update the header section in favorites.html -->
+<header class="app-header">
+    <button class="back-btn" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="app-title">Favorites</h1>
+    <div class="header-actions">
+        <button class="header-btn premium-btn" id="addItemsBtn">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add Items</span>
+        </button>
+        <button class="header-btn premium-btn" id="addFavoritesBtn">
+            <i class="fas fa-star"></i>
+            <span>Add Favorites</span>
+        </button>
+    </div>
+</header>
+
+    <main class="favorites-container">
+        <div class="favorites-header">
+            <h2>Your Favorite Items</h2>
+            <select id="favoritesSort" class="sort-select">
+                <option value="alphabetical">A-Z</option>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="category">By Category</option>
+            </select>
+        </div>
+
+        <div class="favorites-stats">
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <span id="favoritesCount">0</span>
+                <p>Total Favorites</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-layer-group"></i>
+                <span id="categoriesCount">0</span>
+                <p>Categories</p>
+            </div>
+        </div>
+
+        <div class="favorites-grid" id="favoritesGrid">
+            <!-- Favorites will be loaded here -->
+            <div class="empty-favorites" id="emptyFavorites">
+                <i class="fas fa-star"></i>
+                <h3>No Favorites Yet</h3>
+                <p>Start adding favorites from your items!</p>
+                <button onclick="location.href='index.html'" class="browse-btn">
+                    Browse Items
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="storage.js"></script>
+    <script src="favorites.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>

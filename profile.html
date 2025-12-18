@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cropper.js for image cropping -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+</head>
+<body>
+    <header class="app-header">
+        <button class="back-btn" onclick="location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="app-title">Profile</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="profile-container" id="profileContainer">
+        <!-- Content will be loaded dynamically -->
+    </main>
+
+    
+
+    <!-- Image Crop Modal -->
+    <div class="crop-modal" id="cropModal">
+        <div class="crop-modal-content">
+            <div class="crop-modal-header">
+                <h3><i class="fas fa-crop-alt"></i> Crop Profile Image</h3>
+                <button class="close-crop-modal" id="closeCropModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="crop-modal-body">
+                <div class="crop-container">
+                    <img id="cropImage" src="" alt="Crop Preview">
+                </div>
+                <div class="crop-instructions">
+                    <p><i class="fas fa-info-circle"></i> Drag to adjust the crop area. The circular area will be your profile picture.</p>
+                </div>
+                <div class="crop-actions">
+                    <button class="crop-btn cancel" id="cancelCrop">
+                        <i class="fas fa-times"></i>
+                        <span>Cancel</span>
+                    </button>
+                    <button class="crop-btn confirm" id="applyCrop">
+                        <i class="fas fa-check"></i>
+                        <span>Apply Crop</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Quick Check Popup Template -->
+    <div class="quickcheck-popup" id="quickcheckPopup">
+        <div class="quickcheck-popup-content">
+            <div class="quickcheck-popup-header">
+                <h3 id="quickcheckTitle"><i class="fas fa-list"></i> Items</h3>
+                <button class="close-quickcheck-popup" id="closeQuickcheckPopup">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="quickcheck-popup-body">
+                <div id="quickcheckContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+            <!-- Premium Confirmation Modal -->
+    <div class="premium-confirm-modal" id="confirmModalPremium">
+        <div class="premium-confirm-overlay"></div>
+        <div class="premium-confirm-content">
+            <div class="premium-confirm-header">
+                <div class="premium-confirm-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3 id="confirmModalTitle">Confirm Action</h3>
+                <button class="premium-confirm-close" id="confirmModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="premium-confirm-body">
+                <div class="premium-confirm-message" id="confirmModalMessage">
+                    Are you sure?
+                </div>
+                
+                <div class="premium-confirm-details">
+                    <div class="premium-confirm-warning">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>This action cannot be undone</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="premium-confirm-footer">
+                <button class="premium-confirm-btn premium-confirm-cancel" id="confirmModalCancel">
+                    <i class="fas fa-times"></i>
+                    <span>Cancel</span>
+                </button>
+                <button class="premium-confirm-btn premium-confirm-action" id="confirmModalConfirm">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Remove Workout</span>
+                </button>
+            </div>
+        </div>
+    </div>   
+
+    <script src="storage.js"></script>
+    <script src="theme.js"></script>
+    <!-- Cropper.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

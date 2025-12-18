@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items - Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="add.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Update the header section in add.html -->
+<header class="app-header">
+    <button class="back-btn" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="app-title">Add Items</h1>
+    <button class="remove-shortcut premium-btn" onclick="location.href='remove.html'">
+        <i class="fas fa-trash-alt"></i>
+        <span>Remove</span>
+    </button>
+</header>
+
+    <main class="add-container">
+        <form id="addItemForm" class="add-form">
+            <div class="form-group">
+                <label for="categorySelect">Category</label>
+                <select id="categorySelect">
+                    <option value="">Select or create category</option>
+                </select>
+                <input type="text" id="newCategory" placeholder="Or enter new category">
+            </div>
+
+            <div class="form-group">
+                <label for="itemTitle">Title *</label>
+                <input type="text" id="itemTitle" required placeholder="Enter item title">
+            </div>
+
+            <div class="form-group">
+                <label for="itemDescription">Description</label>
+                <textarea id="itemDescription" placeholder="Enter description (optional)"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="itemProgress">Progress</label>
+                <input type="text" id="itemProgress" placeholder="e.g., 5/10, Chapter 12, 30min">
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="itemFavorite">
+                <label for="itemFavorite">Add to Favorites</label>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="itemCompleted">
+                <label for="itemCompleted">Mark as Completed</label>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-save"></i> Save Item
+            </button>
+        </form>
+
+        <section class="recent-items">
+            <h3>Recently Added</h3>
+            <div class="recent-list" id="recentItems">
+                <!-- Recent items will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="storage.js"></script>
+    <script src="add.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>

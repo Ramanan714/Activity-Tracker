@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+   <header class="app-header">
+    <button class="back-btn" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="app-title">My Wishlist</h1>
+    <div class="header-actions">
+        <button class="header-btn remove-btn premium-btn" id="removeWishlistBtn">
+            <i class="fas fa-trash-alt"></i>
+            <span>Remove</span>
+        </button>
+        <button class="header-btn add-btn premium-btn" id="addWishlistBtn">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add Item</span>
+        </button>
+    </div>
+</header>
+
+    <main class="wishlist-container">
+        <!-- User Greeting Section -->
+        <section class="wishlist-greeting" id="wishlistGreeting">
+            <!-- Will be loaded dynamically -->
+        </section>
+
+        <!-- Wishlist Stats -->
+        <div class="wishlist-stats">
+            <div class="stat-card" data-filter="all">
+                <i class="fas fa-gift"></i>
+                <span id="totalItemsCount">0</span>
+                <p>Total Items</p>
+            </div>
+            <div class="stat-card" data-filter="category">
+                <i class="fas fa-layer-group"></i>
+                <span id="categoriesCount">0</span>
+                <p>Categories</p>
+            </div>
+            <div class="stat-card" data-filter="high">
+                <i class="fas fa-fire"></i>
+                <span id="highPriorityCount">0</span>
+                <p>High Priority</p>
+            </div>
+            <div class="stat-card" data-filter="medium">
+                <i class="fas fa-flag"></i>
+                <span id="mediumPriorityCount">0</span>
+                <p>Medium Priority</p>
+            </div>
+            <div class="stat-card" data-filter="low">
+                <i class="fas fa-leaf"></i>
+                <span id="lowPriorityCount">0</span>
+                <p>Low Priority</p>
+            </div>
+        </div>
+
+        <!-- Filter and Sort Controls -->
+        <div class="wishlist-controls">
+            <div class="filter-sort-box">
+                <div class="filter-group">
+                    <label for="filterCategory">Filter by Category:</label>
+                    <select id="filterCategory" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <!-- Categories will be loaded dynamically -->
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sortWishlist">Sort by:</label>
+                    <select id="sortWishlist" class="filter-select">
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="priority">Priority</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="search-container">
+                    <input type="text" id="wishlistSearch" placeholder="Search wishlist items...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist Items Container -->
+        <div class="wishlist-items-container">
+            <div class="section-header">
+                <h2>Wishlist Items</h2>
+                <button class="add-item-btn premium-btn" id="addItemBtn">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add Item</span>
+                </button>
+            </div>
+
+            <div class="wishlist-items-grid" id="wishlistItemsGrid">
+                <!-- Wishlist items will be loaded here -->
+                <div class="empty-wishlist" id="emptyWishlist">
+                    <i class="fas fa-gift"></i>
+                    <h3>Your Wishlist is Empty</h3>
+                    <p>Start adding items you want to track!</p>
+                    <button class="add-first-btn premium-btn" id="addFirstWishlist">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add First Item</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Wishlist Modal -->
+    <div class="wishlist-modal" id="wishlistModal">
+        <div class="wishlist-modal-content">
+            <div class="wishlist-modal-header">
+                <h3 id="wishlistModalTitle"><i class="fas fa-gift"></i> Add to Wishlist</h3>
+                <button class="close-wishlist-modal" id="closeWishlistModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="wishlist-modal-body">
+                <form id="wishlistForm" class="wishlist-form">
+                    <!-- Category Section -->
+                    <div class="form-group">
+                        <label for="wishlistCategory">Category *</label>
+                        <div class="category-selector">
+                            <select id="wishlistCategory" class="form-select" required>
+                                <option value="">Select Category</option>
+                                <!-- Categories will be loaded dynamically -->
+                            </select>
+                            <button type="button" class="add-category-btn" id="addCategoryBtn">
+                                <i class="fas fa-plus"></i> New Category
+                            </button>
+                        </div>
+                        <input type="text" id="newCategoryInput" class="form-input" 
+                               placeholder="Enter new category name" style="display: none; margin-top: 8px;">
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form-group">
+                        <label for="wishlistName">Title *</label>
+                        <input type="text" id="wishlistName" class="form-input" 
+                               required 
+                               placeholder="e.g., One Piece Manga Box Set">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="wishlistDescription">Description</label>
+                        <textarea id="wishlistDescription" class="form-textarea" 
+                                  placeholder="Optional description..."></textarea>
+                    </div>
+
+                    <!-- Completion Date -->
+                    <div class="form-group">
+                        <label for="wishlistDate">When will complete?</label>
+                        <input type="date" id="wishlistDate" class="form-input">
+                    </div>
+
+                    <!-- Priority Selection -->
+                    <div class="form-group">
+                        <label>Priority *</label>
+                        <div class="priority-selector">
+                            <div class="priority-options">
+                                <button type="button" class="priority-option" data-priority="high">
+                                    <i class="fas fa-fire"></i>
+                                    <span>High</span>
+                                </button>
+                                <button type="button" class="priority-option active" data-priority="medium">
+                                    <i class="fas fa-flag"></i>
+                                    <span>Medium</span>
+                                </button>
+                                <button type="button" class="priority-option" data-priority="low">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Low</span>
+                                </button>
+                            </div>
+                            <input type="hidden" id="wishlistPriority" value="medium">
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="wishlistId">
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="form-action-btn reset" id="resetWishlistForm">
+                            <i class="fas fa-undo"></i>
+                            <span>Reset</span>
+                        </button>
+                        <button type="button" class="form-action-btn close" id="closeWishlistForm">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </button>
+                        <button type="submit" class="form-action-btn save" id="saveWishlist">
+                            <i class="fas fa-save"></i>
+                            <span>Save Item</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="storage.js"></script>
+    <script src="theme.js"></script>
+    <script src="wishlist.js"></script>
+</body>
+</html>

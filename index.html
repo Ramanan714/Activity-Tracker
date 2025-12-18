@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header with menu and settings -->
+    <header class="app-header">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <h1 class="app-title">Activity Tracker</h1>
+        <button class="settings-btn" id="settingsBtn">⚙️</button>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search items...">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <button class="action-btn" onclick="location.href='add.html'">
+            <i class="fas fa-plus"></i> Add Items
+        </button>
+        <button class="action-btn" onclick="location.href='remove.html'">
+            <i class="fas fa-trash"></i> Remove Items
+        </button>
+        <button class="action-btn" onclick="location.href='favorites.html'">
+            <i class="fas fa-star"></i> Favorites
+        </button>
+        <button class="action-btn" onclick="location.href='wishlist.html'">
+            <i class="fas fa-star"></i> Wishlist
+        </button>
+        <button class="action-btn" id="viewAllBtn">
+            <i class="fas fa-eye"></i> View All
+        </button>
+    </div>
+    <!-- Update index.html - Add this section after Quick Actions -->
+<section class="greeting-section" id="greetingSection">
+    <div class="greeting-card">
+        <div class="greeting-profile">
+            <div class="profile-image-container">
+                <img id="greetingProfileImg" src="" alt="Profile">
+                <div class="profile-image-fallback" id="profileFallback">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="greeting-text">
+                <h2 id="greetingMessage">Hello, User</h2>
+                <div class="datetime-display">
+                    <span id="currentDate">Wednesday, 10 Dec</span>
+                    <span class="time-separator">•</span>
+                    <span id="currentTime">00:00</span>
+                </div>
+            </div>
+        </div>
+        <button class="edit-profile-btn" onclick="location.href='profile.html'">
+            <i class="fas fa-edit"></i>
+        </button>
+    </div>
+</section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2>Categories</h2>
+        <div class="categories-container" id="categoriesContainer">
+            <!-- Categories will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Items Section -->
+    <section class="items-section">
+        <div class="section-header">
+            <h2>Recent Items</h2>
+            <select id="sortSelect" class="sort-select">
+                <option value="favorites">Favorites First</option>
+                <option value="alphabetical">A-Z</option>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+            </select>
+        </div>
+        <div class="items-container" id="itemsContainer">
+            <!-- Items will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Menu Panel -->
+    <div class="menu-panel" id="menuPanel">
+        <div class="menu-content">
+            <button class="close-menu" id="closeMenu">&times;</button>
+            <div class="menu-user">
+                <img src="" alt="Profile" id="menuProfileImg">
+                <span id="menuUserName">Guest</span>
+            </div>
+            <a href="profile.html" class="menu-item">
+                <i class="fas fa-user"></i> Profile
+            </a>
+            <a href="add.html" class="menu-item">
+                <i class="fas fa-plus"></i> Add Items
+            </a>
+            <a href="remove.html" class="menu-item">
+                <i class="fas fa-trash"></i> Remove Items
+            </a>
+            <a href="wishlist.html" class="menu-item">
+                <i class="fas fa-heart"></i> Wishlist
+            </a>
+            <a href="#" class="menu-item" id="viewAllMenu">
+                <i class="fas fa-eye"></i> View All
+            </a>
+        </div>
+    </div>
+
+    <div class="settings-group">
+    <h4>Backup & Restore</h4>
+    <p class="settings-description">Save or restore your data</p>
+    
+    <button class="settings-btn-box" id="exportBoxBtn">
+        <i class="fas fa-file-export"></i>
+        <div class="settings-btn-content">
+            <h4>Export Data</h4>
+            <p>Download all your data as JSON</p>
+        </div>
+        <span class="arrow">→</span>
+    </button>
+    
+    <button class="settings-btn-box" id="importBoxBtn">
+        <i class="fas fa-file-import"></i>
+        <div class="settings-btn-content">
+            <h4>Import Data</h4>
+            <p>Restore from backup file</p>
+        </div>
+        <span class="arrow">→</span>
+    </button>
+    <input type="file" id="importFileBox" accept=".json" style="display: none;">
+</div>
+
+    <!-- Overlay for panels -->
+    <div class="overlay" id="overlay"></div>
+    <!-- Edit Modal - Fixed -->
+<div class="edit-modal" id="editModal">
+    <div class="edit-modal-content">
+        <div class="edit-modal-header">
+            <h3>Edit Item</h3>
+            <button class="close-edit-modal" id="closeEditModal">&times;</button>
+        </div>
+        <div class="edit-modal-body">
+            <form id="editItemForm" class="edit-form">
+                <div class="form-group">
+                    <label for="editCategorySelect">Category</label>
+                    <select id="editCategorySelect" class="form-select">
+                        <option value="">Select or create category</option>
+                    </select>
+                    <input type="text" id="editNewCategory" class="form-input" placeholder="Or enter new category">
+                </div>
+
+                <div class="form-group">
+                    <label for="editItemTitle">Title *</label>
+                    <input type="text" id="editItemTitle" class="form-input" required placeholder="Enter item title">
+                </div>
+
+                <div class="form-group">
+                    <label for="editItemDescription">Description</label>
+                    <textarea id="editItemDescription" class="form-textarea" placeholder="Enter description (optional)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editItemProgress">Progress</label>
+                    <input type="text" id="editItemProgress" class="form-input" placeholder="e.g., 5/10, Chapter 12, 30min">
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="editItemFavorite" class="form-checkbox">
+                    <label for="editItemFavorite" class="checkbox-label">Add to Favorites</label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="editItemCompleted" class="form-checkbox">
+                    <label for="editItemCompleted" class="checkbox-label">Mark as Completed</label>
+                </div>
+
+                <input type="hidden" id="editItemId">
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn premium-btn" id="cancelEditBtn">
+                        <i class="fas fa-times-circle"></i>
+                        <span>Cancel</span>
+                    </button>
+                    <button type="submit" class="save-btn premium-btn">
+                        <i class="fas fa-save"></i>
+                        <span>Save Changes</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Make sure this is in your index.html, right before the closing body tag -->
+<div class="settings-panel" id="settingsPanel">
+    <div class="settings-content">
+        <button class="close-settings" id="closeSettings">&times;</button>
+        <h3>Settings</h3>
+        
+        <div class="settings-group">
+            <h4>Theme</h4>
+            <select id="themeSelect" class="theme-select">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="system">System Default</option>
+            </select>
+        </div>
+        
+        <div class="settings-group">
+            <h4>Backup & Restore</h4>
+            <p class="settings-description">Save or restore your data</p>
+            
+            <button class="settings-btn-box" id="exportBoxBtn">
+                <i class="fas fa-file-export"></i>
+                <div class="settings-btn-content">
+                    <h4>Export Data</h4>
+                    <p>Download all your data as JSON</p>
+                </div>
+                <span class="arrow">→</span>
+            </button>
+            
+            <button class="settings-btn-box" id="importBoxBtn">
+                <i class="fas fa-file-import"></i>
+                <div class="settings-btn-content">
+                    <h4>Import Data</h4>
+                    <p>Restore from backup file</p>
+                </div>
+                <span class="arrow">→</span>
+            </button>
+            <input type="file" id="importFileBox" accept=".json" style="display: none;">
+        </div>
+    </div>
+</div>
+
+<!-- Also make sure the overlay exists -->
+<div class="overlay" id="overlay"></div>
+
+    <script src="storage.js"></script>
+    <script src="theme.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

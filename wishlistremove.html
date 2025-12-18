@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Wishlist Items - Activity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="wishlistremove.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="app-header">
+        <button class="back-btn" onclick="location.href='wishlist.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="app-title">Remove Wishlist Items</h1>
+        <button class="add-shortcut premium-btn" onclick="location.href='wishlist.html'">
+            <i class="fas fa-gift"></i>
+            <span>Wishlist</span>
+        </button>
+    </header>
+
+    <main class="wishlist-remove-container">
+        <div class="remove-options">
+            <h3><i class="fas fa-trash"></i> Remove Category</h3>
+            <p>Delete an entire category and all its wishlist items</p>
+            <select id="categoryRemoveSelect" class="remove-select">
+                <option value="">Select category to remove</option>
+            </select>
+            <button id="removeCategoryBtn" class="danger-btn premium-btn">
+                <i class="fas fa-trash"></i> Remove Category
+            </button>
+
+            <div class="divider"></div>
+
+            <h3><i class="fas fa-gift"></i> Remove Single Item</h3>
+            <p>Delete a specific item from a category</p>
+            <select id="categoryForItemSelect" class="remove-select">
+                <option value="">Select category first</option>
+            </select>
+            <select id="itemRemoveSelect" class="remove-select" disabled>
+                <option value="">Select item to remove</option>
+            </select>
+            <button id="removeItemBtn" class="danger-btn premium-btn" disabled>
+                <i class="fas fa-trash"></i> Remove Item
+            </button>
+        </div>
+
+        <div class="stats-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>This action cannot be undone. Make sure to backup your data first.</p>
+        </div>
+    </main>
+
+    <script src="storage.js"></script>
+    <script src="wishlistremove.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>
