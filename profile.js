@@ -98,7 +98,7 @@ class ProfilePage {
     }
 
     // Load profile content dynamically
-    loadProfileContent() {
+        loadProfileContent() {
         const profileContainer = document.getElementById('profileContainer');
         if (!profileContainer) return;
 
@@ -107,7 +107,16 @@ class ProfilePage {
         const workouts = this.getWorkouts();
         const wishlistCount = this.getWishlistCount();
         
-        profileContainer.innerHTML = this.getProfileHTML(profile, stats, workouts, wishlistCount);
+        // FIX: Check if profile exists, use default if null
+        const safeProfile = profile || {
+            name: 'Guest User',
+            username: 'guest',
+            tagline: '',
+            image: ''
+        };
+        
+        profileContainer.innerHTML = this.getProfileHTML(safeProfile, stats, workouts, wishlistCount);
+       
         
         // Setup all functionality
         this.setupProfileForm();
