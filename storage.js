@@ -139,8 +139,18 @@ class StorageManager {
     }
 
     // Get profile data
-    getProfile() {
+        getProfile() {
         const data = this.getData();
+        if (!data.profile) {
+            data.profile = { // Create default profile
+                name: '',
+                username: '',
+                tagline: '',
+                image: '',
+                joinDate: new Date().toISOString()
+            };
+            this.setData(data);
+        }
         return data.profile;
     }
 
