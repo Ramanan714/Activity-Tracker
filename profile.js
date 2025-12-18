@@ -483,10 +483,10 @@ class ProfilePage {
         }
     }
 
-        resetProfileForm() {
+            resetProfileForm() {
         console.log('resetProfileForm() called');
         
-        const profile = this.storage.getProfile();
+        const profile = this.storage.getProfile() || {}; // FIX: Add fallback
         const nameInput = document.getElementById('userName');
         const taglineInput = document.getElementById('userTagline');
 
@@ -494,12 +494,12 @@ class ProfilePage {
         console.log('Input elements:', nameInput, taglineInput);
 
         if (nameInput) {
-            nameInput.value = profile.name || '';
+            nameInput.value = profile.name || ''; // FIX: Use empty if no name
             console.log('Set name to:', nameInput.value);
         }
         
         if (taglineInput) {
-            taglineInput.value = profile.tagline || '';
+            taglineInput.value = profile.tagline || ''; // FIX: Use empty if no tagline
             console.log('Set tagline to:', taglineInput.value);
         }
 
@@ -508,36 +508,38 @@ class ProfilePage {
     }
 
     saveProfile() {
-        console.log('saveProfile() called'); // ADD THIS
+        console.log('saveProfile() called');
         
         const nameInput = document.getElementById('userName');
         const taglineInput = document.getElementById('userTagline');
         const saveBtn = document.getElementById('saveProfile');
 
-        console.log('Inputs found - Name:', nameInput, 'Tagline:', taglineInput); // ADD THIS
+        console.log('Inputs found - Name:', nameInput, 'Tagline:', taglineInput);
         
         if (!nameInput || !nameInput.value.trim()) {
-            console.error('Name input missing or empty'); // ADD THIS
+            console.error('Name input missing or empty');
             this.showPremiumMessage('Please enter your name', 'error');
             nameInput?.focus();
             return;
         }
 
-        console.log('Proceeding with save...'); // ADD THIS
+        console.log('Proceeding with save...');
         
-        const profile = this.storage.getProfile();
+        // FIX: Get profile or create empty one
+        const profile = this.storage.getProfile() || {};
+        
         const profileData = {
             name: this.capitalizeFirstLetter(nameInput.value.trim()),
             tagline: taglineInput?.value.trim() || '',
             username: nameInput.value.trim().toLowerCase().replace(/\s+/g, ''),
-            image: profile.image || '', // Keep existing image
+            image: profile.image || '', // Use empty if no image
             updatedAt: new Date().toISOString(),
             joinDate: profile.joinDate || new Date().toISOString()
         };
 
         // Show loading state
         if (saveBtn) {
-            console.log('Save button found, setting loading state'); // ADD THIS
+            console.log('Save button found, setting loading state');
             const originalHTML = saveBtn.innerHTML;
             saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Saving...</span>';
             saveBtn.disabled = true;
