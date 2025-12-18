@@ -11,8 +11,10 @@ class ProfilePage {
     }
 
     // Initialize profile page
-    init() {
+       init() {
         console.log('Initializing Profile Page...');
+        console.log('Storage available:', this.storage); // ADD THIS
+        
         this.createModals();
         this.loadProfileContent();
         this.initEventListeners();
@@ -23,6 +25,16 @@ class ProfilePage {
         
         // FIX: Add workout modal to DOM if it doesn't exist
         this.ensureWorkoutModalExists();
+        
+        // Debug: Check if form exists after loading
+        setTimeout(() => {
+            const form = document.getElementById('profileForm');
+            console.log('Form exists after load:', !!form); // ADD THIS
+            const resetBtn = document.getElementById('resetProfile');
+            console.log('Reset button exists:', !!resetBtn); // ADD THIS
+            const saveBtn = document.getElementById('saveProfile');
+            console.log('Save button exists:', !!saveBtn); // ADD THIS
+        }, 500);
     }
 
     // Add this method to ensure workout modal exists in DOM
@@ -444,45 +456,75 @@ class ProfilePage {
         });
     }
 
-    setupProfileForm() {
+        setupProfileForm() {
         const form = document.getElementById('profileForm');
-        if (!form) return;
+        if (!form) {
+            console.error('Profile form not found!');
+            return;
+        }
 
+        console.log('Setting up profile form...');
+        
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            console.log('Profile form submitted');
             this.saveProfile();
         });
 
         const resetBtn = document.getElementById('resetProfile');
         if (resetBtn) {
+            console.log('Reset button found:', resetBtn);
             resetBtn.addEventListener('click', () => {
+                console.log('Reset button clicked');
                 this.resetProfileForm();
             });
+        } else {
+            console.error('Reset button not found!');
         }
     }
 
-    resetProfileForm() {
+        resetProfileForm() {
+        console.log('resetProfileForm() called');
+        
         const profile = this.storage.getProfile();
         const nameInput = document.getElementById('userName');
         const taglineInput = document.getElementById('userTagline');
 
-        if (nameInput) nameInput.value = profile.name || '';
-        if (taglineInput) taglineInput.value = profile.tagline || '';
+        console.log('Current profile:', profile);
+        console.log('Input elements:', nameInput, taglineInput);
+
+        if (nameInput) {
+            nameInput.value = profile.name || '';
+            console.log('Set name to:', nameInput.value);
+        }
+        
+        if (taglineInput) {
+            taglineInput.value = profile.tagline || '';
+            console.log('Set tagline to:', taglineInput.value);
+        }
 
         this.showPremiumMessage('Form reset to current profile', 'info');
+        console.log('Reset complete');
     }
 
     saveProfile() {
+        console.log('saveProfile() called'); // ADD THIS
+        
         const nameInput = document.getElementById('userName');
         const taglineInput = document.getElementById('userTagline');
         const saveBtn = document.getElementById('saveProfile');
 
+        console.log('Inputs found - Name:', nameInput, 'Tagline:', taglineInput); // ADD THIS
+        
         if (!nameInput || !nameInput.value.trim()) {
+            console.error('Name input missing or empty'); // ADD THIS
             this.showPremiumMessage('Please enter your name', 'error');
             nameInput?.focus();
             return;
         }
 
+        console.log('Proceeding with save...'); // ADD THIS
+        
         const profile = this.storage.getProfile();
         const profileData = {
             name: this.capitalizeFirstLetter(nameInput.value.trim()),
@@ -495,6 +537,7 @@ class ProfilePage {
 
         // Show loading state
         if (saveBtn) {
+            console.log('Save button found, setting loading state'); // ADD THIS
             const originalHTML = saveBtn.innerHTML;
             saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Saving...</span>';
             saveBtn.disabled = true;
